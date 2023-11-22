@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helper;
+namespace Inilim;
 
 class Integer
 {
@@ -32,8 +32,8 @@ class Integer
    public const MEDIUM_INT_MIN = -8388608;
    public const MEDIUM_INT_UNSIGNED_MAX = 16777215;
    public const MEDIUM_INT_UNSIGNED_MIN = 0;
-   private const MEDIUM_INT_MAX_LENGHT = 6;
-   private const MEDIUM_INT_MIN_LENGHT = 6;
+   private const MEDIUM_INT_MAX_LENGHT = 7;
+   private const MEDIUM_INT_MIN_LENGHT = 7;
    private const MEDIUM_INT_UNSIGNED_MAX_LENGHT = 8;
    private const MEDIUM_INT_UNSIGNED_MIN_LENGHT = 1;
 
@@ -46,6 +46,8 @@ class Integer
    private const INT_MAX_UNSIGNED_LENGHT = 10;
    private const INT_MIN_UNSIGNED_LENGHT = 1;
 
+   // BIGINT: представляет целые числа от -9223372036854775808 до 9223372036854775807, занимает 8 байт
+   // BIGINT UNSIGNED: представляет целые числа от 0 до 18446744073709551615, занимает 8 байт
    private const BIG_INT_MAX_LENGHT = 19;
    private const BIG_INT_MIN_LENGHT = 19;
    private const BIG_INT_MAX_UNSIGNED_LENGHT = 20;
@@ -53,53 +55,69 @@ class Integer
 
    private const MAX_LEN_32_BIT = 10;
 
-   // BIGINT: представляет целые числа от -9223372036854775808 до 9223372036854775807, занимает 8 байт
-   // BIGINT UNSIGNED: представляет целые числа от 0 до 18446744073709551615, занимает 8 байт
-
    /**
+    * -9223372036854775808 <> 9223372036854775807
     * @param int|string|null $value
     */
    public function isBigInt($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       $value = strval($value);
       $len = $this->getLen($value);
-      if ($len < self::MAX_LEN_32_BIT) return true;
+      if ($len < self::BIG_INT_MAX_LENGHT) return true;
+      if ($len > self::BIG_INT_MAX_LENGHT) return false;
+      // длина 19
+      $last = str_starts_with($value, '-') ? 8 : 7;
+      return $this->compare(str_split($value), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
    }
 
    /**
+    * 0 <> 18446744073709551615
     * @param int|string|null $value
     */
    public function isBigIntUnsigned($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       $value = strval($value);
+      if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
-      if ($len < self::MAX_LEN_32_BIT) return true;
-   }
-
-   /**
-    * @param int|string|null $value
-    */
-   public function isInt($value): bool
-   {
-      if (!isInt($value)) return false;
-      $value = strval($value);
-      $len = $this->getLen($value);
-      if ($len < self::MAX_LEN_32_BIT) return true;
+      if ($len < self::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
+      if ($len > self::BIG_INT_MAX_UNSIGNED_LENGHT) return false;
+      // длина 20
+      return $this->compare(str_split($value), [1, 8, 4, 4, 6, 7, 4, 4, 0, 7, 3, 7, 0, 9, 5, 5, 1, 6, 1, 5]);
    }
 
    /**
     * -2147483648 <> 2147483647
-    * 0 <> 4294967295
+    * @param int|string|null $value
+    */
+   public function isInt($value): bool
+   {
+      if (!$this->isNumeric($value)) return false;
+      $value = strval($value);
+      $len = $this->getLen($value);
+      if ($len < self::MAX_LEN_32_BIT) return true;
+      if ($len > self::MAX_LEN_32_BIT) return false;
+      // длина 10
+      $last = str_starts_with($value, '-') ? 8 : 7;
+      return $this->compare(str_split($value), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
+   }
+
+   /**
+    * 
+    * 0 <> 4_294_967_295
     * @param int|string|null $value
     */
    public function isIntUnsigned($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       $value = strval($value);
+      if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
+      if ($len > self::MAX_LEN_32_BIT) return false;
+      // длина 10
+      return $this->compare(str_split($value), [4, 2, 9, 4, 9, 6, 7, 2, 9, 5]);
    }
 
    // ------------------------------------------------------------------
@@ -111,9 +129,9 @@ class Integer
     */
    public function isMediumInt($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::MEDIUM_INT_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
+      return $this->beetween($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
    }
 
    /**
@@ -121,9 +139,9 @@ class Integer
     */
    public function isMediumIntUnsigned($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
+      return $this->beetween($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
    }
 
    /**
@@ -131,9 +149,9 @@ class Integer
     */
    public function isSmallInt($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::SMALL_INT_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
+      return $this->beetween($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
    }
 
    /**
@@ -141,9 +159,9 @@ class Integer
     */
    public function isSmallIntUnsigned($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::SMALL_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
+      return $this->beetween($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
    }
 
    /**
@@ -151,9 +169,9 @@ class Integer
     */
    public function isTinyInt($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::TINY_INT_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
+      return $this->beetween($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
    }
 
    /**
@@ -161,22 +179,33 @@ class Integer
     */
    public function isTinyIntUnsigned($value): bool
    {
-      if (!isInt($value)) return false;
+      if (!$this->isNumeric($value)) return false;
       if ($this->getLen($value) > self::TINY_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween32bit($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
+      return $this->beetween($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
+   }
+
+   /**
+    * функция не проверяет длину значения, будет true даже с bigint и более.
+    */
+   public function isNumeric(mixed $v): bool
+   {
+      if (!is_scalar($v) || is_bool($v)) return false;
+      $v = strval($v);
+      if (preg_match('#^0$#', $v) || preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;
+      return false;
    }
 
    // ------------------------------------------------------------------
    // private
    // ------------------------------------------------------------------
 
-   /**
-    * @param int|string|null $value
-    */
-   private function initialCheck64bit($value): bool
+   private function compare(array $value, array $a): bool
    {
-      $len = $this->getLen($value);
-      return $len >= self::MAX_LEN_32_BIT;
+      $value = array_combine($value, $a);
+      foreach ($value as $v => $a) {
+         if (intval($v) > $a) return false;
+      }
+      return true;
    }
 
    /**
@@ -184,7 +213,7 @@ class Integer
     *
     * @param string|int|null $value
     */
-   private function beetween32bit($value, int $max, int $min): bool
+   private function beetween($value, int $max, int $min): bool
    {
       $value = intval($value);
       return !($value > $max || $value < $min);

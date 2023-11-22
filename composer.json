@@ -1,0 +1,20 @@
+{
+    "name": "inilim/integer",
+    "description": "integer",
+    "type": "library",
+    "license": "Free",
+    "autoload": {
+        "psr-4": {
+            "Inilim\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "inilim"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2"
+    }
+}
