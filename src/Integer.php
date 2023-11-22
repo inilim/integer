@@ -57,7 +57,7 @@ class Integer
 
    /**
     * -9223372036854775808 <> 9223372036854775807
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isBigInt($value): bool
    {
@@ -73,7 +73,7 @@ class Integer
 
    /**
     * 0 <> 18446744073709551615
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isBigIntUnsigned($value): bool
    {
@@ -89,7 +89,7 @@ class Integer
 
    /**
     * -2147483648 <> 2147483647
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isInt($value): bool
    {
@@ -106,7 +106,7 @@ class Integer
    /**
     * 
     * 0 <> 4_294_967_295
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isIntUnsigned($value): bool
    {
@@ -125,7 +125,7 @@ class Integer
    // ------------------------------------------------------------------
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isMediumInt($value): bool
    {
@@ -135,7 +135,7 @@ class Integer
    }
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isMediumIntUnsigned($value): bool
    {
@@ -145,7 +145,7 @@ class Integer
    }
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isSmallInt($value): bool
    {
@@ -155,7 +155,7 @@ class Integer
    }
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isSmallIntUnsigned($value): bool
    {
@@ -165,7 +165,7 @@ class Integer
    }
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isTinyInt($value): bool
    {
@@ -175,7 +175,7 @@ class Integer
    }
 
    /**
-    * @param int|string|null $value
+    * @param mixed $value
     */
    public function isTinyIntUnsigned($value): bool
    {
