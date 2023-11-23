@@ -236,9 +236,8 @@ class Integer
    }
 
    /**
-    * метод для 32 bit'ых систем
     */
-   private function beetween(int|float|string $value, int $max, int $min): bool
+   private function beetween(string $value, int $max, int $min): bool
    {
       $value = intval($value);
       return !($value > $max || $value < $min);
