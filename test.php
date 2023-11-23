@@ -4,8 +4,8 @@ include 'src/Integer.php';
 
 $a = new Inilim\Integer;
 
-
-var_dump($a->isBigInt('9223372036854775807'));
+//                     9223372036854775807
+var_dump($a->isBigInt('8323372036854775807'));
 
 
 exit();

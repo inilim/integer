@@ -203,9 +203,11 @@ class Integer
    {
       $value = array_combine($value, $a);
       foreach ($value as $v => $a) {
-         if (intval($v) > $a) return false;
+         $v = intval($v);
+         if ($v > $a) return false;
+         else return true;
       }
-      return true;
+      // return true;
    }
 
    /**
