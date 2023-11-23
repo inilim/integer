@@ -69,7 +69,7 @@ class Integer
       if ($len > self::BIG_INT_MAX_LENGHT) return false;
       // длина 19
       $last = str_starts_with($value, '-') ? 8 : 7;
-      return $this->compare(str_split($value), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
+      return $this->compare(str_split(trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
    }
 
    /**
@@ -103,7 +103,7 @@ class Integer
       if ($len > self::MAX_LEN_32_BIT) return false;
       // длина 10
       $last = str_starts_with($value, '-') ? 8 : 7;
-      return $this->compare(str_split($value), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
+      return $this->compare(str_split(trim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
    }
 
    /**
@@ -224,9 +224,11 @@ class Integer
    private function compare(array $value, array $array_int): bool
    {
       $combine = array_map(null, $value, $array_int);
+      // print_r($combine);
       foreach ($combine as $c) {
          list($v, $a) = $c;
          $v = intval($v);
+         // var_dump($v, $a);
          if ($v > $a) return false;
          elseif ($v < $a) return true;
       }
