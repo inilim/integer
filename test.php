@@ -1,11 +1,15 @@
 <?php
 
-include 'src/Integer.php';
+include 'vendor/autoload.php';
 
 $a = new Inilim\Integer;
-
+echo var_export([
+   'a' => 'a',
+   'aa' => 'a',
+]);
+exit();
 //                     9223372036854775807
-var_dump($a->isBigInt('8999999999999999999'));
+echo get_debug_type($a->isBigInt('8999999999999999999'));
 
 
 exit();
