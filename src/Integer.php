@@ -57,12 +57,13 @@ class Integer
 
    /**
     * -9223372036854775808 <> 9223372036854775807
-    * @param mixed $value
     */
-   public function isBigInt($value): bool
+   public function isBigInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
       $value = strval($value);
+      /** @var string $value */
       $len = $this->getLen($value);
       if ($len < self::BIG_INT_MAX_LENGHT) return true;
       if ($len > self::BIG_INT_MAX_LENGHT) return false;
@@ -73,12 +74,13 @@ class Integer
 
    /**
     * 0 <> 18446744073709551615
-    * @param mixed $value
     */
-   public function isBigIntUnsigned($value): bool
+   public function isBigIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
       $value = strval($value);
+      /** @var string $value */
       if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
@@ -89,12 +91,13 @@ class Integer
 
    /**
     * -2147483648 <> 2147483647
-    * @param mixed $value
     */
-   public function isInt($value): bool
+   public function isInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
       $value = strval($value);
+      /** @var string $value */
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
       if ($len > self::MAX_LEN_32_BIT) return false;
@@ -106,12 +109,13 @@ class Integer
    /**
     * 
     * 0 <> 4_294_967_295
-    * @param mixed $value
     */
-   public function isIntUnsigned($value): bool
+   public function isIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
       $value = strval($value);
+      /** @var string $value */
       if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
@@ -125,41 +129,49 @@ class Integer
    // ------------------------------------------------------------------
 
    /**
-    * @param mixed $value
     */
-   public function isMediumInt($value): bool
+   public function isMediumInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
    }
 
    /**
-    * @param mixed $value
     */
-   public function isMediumIntUnsigned($value): bool
+   public function isMediumIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
    }
 
    /**
-    * @param mixed $value
     */
-   public function isSmallInt($value): bool
+   public function isSmallInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
    }
 
    /**
-    * @param mixed $value
     */
-   public function isSmallIntUnsigned($value): bool
+   public function isSmallIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
    }
@@ -170,16 +182,21 @@ class Integer
    public function isTinyInt($value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
    }
 
    /**
-    * @param mixed $value
     */
-   public function isTinyIntUnsigned($value): bool
+   public function isTinyIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
+      /** @var int|float|string $value */
+      $value = strval($value);
+      /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
    }
@@ -199,33 +216,35 @@ class Integer
    // private
    // ------------------------------------------------------------------
 
-   private function compare(array $value, array $a): bool
+   /**
+    * @param string[] $value
+    * @param int[] $array_int
+    */
+   private function compare(array $value, array $array_int): bool
    {
-      $value = array_combine($value, $a);
-      foreach ($value as $v => $a) {
+      $combine = array_map(null, $value, $array_int);
+      foreach ($combine as $c) {
+         list($v, $a) = $c;
          $v = intval($v);
          if ($v > $a) return false;
-         else return true;
+         elseif ($v < $a) return true;
       }
-      // return true;
+      return true;
    }
 
    /**
     * метод для 32 bit'ых систем
-    *
-    * @param string|int|null $value
     */
-   private function beetween($value, int $max, int $min): bool
+   private function beetween(int|float|string $value, int $max, int $min): bool
    {
       $value = intval($value);
       return !($value > $max || $value < $min);
    }
 
    /**
-    * @param int|string|null $value
     */
-   private function getLen($value): int
+   private function getLen(string $value): int
    {
-      return strlen(trim(strval($value), '-'));
+      return strlen(trim($value, '-'));
    }
 }
