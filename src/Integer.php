@@ -221,7 +221,7 @@ class Integer
     * @param string[] $value
     * @param int[] $array_int
     */
-   private function compare(array $value, array $array_int): bool
+   protected function compare(array $value, array $array_int): bool
    {
       $combine = array_map(null, $value, $array_int);
       // print_r($combine);
@@ -237,7 +237,7 @@ class Integer
 
    /**
     */
-   private function beetween(string $value, int $max, int $min): bool
+   protected function beetween(string $value, int $max, int $min): bool
    {
       $value = intval($value);
       return !($value > $max || $value < $min);
@@ -245,7 +245,7 @@ class Integer
 
    /**
     */
-   private function getLen(string $value): int
+   protected function getLen(string $value): int
    {
       return strlen(trim($value, '-'));
    }
