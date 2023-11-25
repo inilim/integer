@@ -213,6 +213,20 @@ class Integer
       return false;
    }
 
+   /**
+    * проверка int для php, 32bit или 64bit
+    * может ли значение стать integer без изменений
+    */
+   function isIntPHP(mixed $v): bool
+   {
+      if ($this->isNumeric($v)) {
+         /** @var string $v */
+         if (strval(intval($v)) == strval($v)) return true;
+         return false;
+      }
+      return false;
+   }
+
    // ------------------------------------------------------------------
    // private
    // ------------------------------------------------------------------
