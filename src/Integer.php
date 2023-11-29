@@ -238,11 +238,9 @@ class Integer
    protected function compare(array $value, array $array_int): bool
    {
       $combine = array_map(null, $value, $array_int);
-      // print_r($combine);
       foreach ($combine as $c) {
          list($v, $a) = $c;
          $v = intval($v);
-         // var_dump($v, $a);
          if ($v > $a) return false;
          elseif ($v < $a) return true;
       }
@@ -250,6 +248,7 @@ class Integer
    }
 
    /**
+    * @param numeric-string $value
     */
    protected function beetween(string $value, int $max, int $min): bool
    {
