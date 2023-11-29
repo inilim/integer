@@ -254,7 +254,7 @@ class Integer
    protected function beetween(string $value, int $max, int $min): bool
    {
       $value = intval($value);
-      return !($value > $max || $value < $min);
+      return !($value > $max && $value < $min);
    }
 
    /**
