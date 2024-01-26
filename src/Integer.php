@@ -62,14 +62,14 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       $len = $this->getLen($value);
       if ($len < self::BIG_INT_MAX_LENGHT) return true;
       if ($len > self::BIG_INT_MAX_LENGHT) return false;
       // длина 19
       $last = str_starts_with($value, '-') ? 8 : 7;
-      return $this->compare(str_split(trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
+      return $this->compare(\str_split(\trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
    }
 
    /**
@@ -79,14 +79,14 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
       if ($len > self::BIG_INT_MAX_UNSIGNED_LENGHT) return false;
       // длина 20
-      return $this->compare(str_split($value), [1, 8, 4, 4, 6, 7, 4, 4, 0, 7, 3, 7, 0, 9, 5, 5, 1, 6, 1, 5]);
+      return $this->compare(\str_split($value), [1, 8, 4, 4, 6, 7, 4, 4, 0, 7, 3, 7, 0, 9, 5, 5, 1, 6, 1, 5]);
    }
 
    /**
@@ -96,14 +96,14 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
       if ($len > self::MAX_LEN_32_BIT) return false;
       // длина 10
       $last = str_starts_with($value, '-') ? 8 : 7;
-      return $this->compare(str_split(trim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
+      return $this->compare(\str_split(\trim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
    }
 
    /**
@@ -114,14 +114,14 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if (str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
       if ($len > self::MAX_LEN_32_BIT) return false;
       // длина 10
-      return $this->compare(str_split($value), [4, 2, 9, 4, 9, 6, 7, 2, 9, 5]);
+      return $this->compare(\str_split($value), [4, 2, 9, 4, 9, 6, 7, 2, 9, 5]);
    }
 
    // ------------------------------------------------------------------
@@ -134,7 +134,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
@@ -146,7 +146,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
@@ -158,7 +158,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
@@ -170,7 +170,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
@@ -183,7 +183,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_MAX_LENGHT) return false;
       return $this->beetween($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
@@ -195,7 +195,7 @@ class Integer
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
-      $value = strval($value);
+      $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_UNSIGNED_MAX_LENGHT) return false;
       return $this->beetween($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
@@ -206,10 +206,10 @@ class Integer
     */
    public function isNumeric(mixed $v): bool
    {
-      if (!is_scalar($v) || is_bool($v)) return false;
+      if (!\is_scalar($v) || \is_bool($v)) return false;
       // here string|int|float
-      $v = strval($v);
-      if (preg_match('#^0$#', $v) || preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;
+      $v = \strval($v);
+      if (\preg_match('#^0$#', $v) || \preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;
       return false;
    }
 
@@ -221,7 +221,7 @@ class Integer
    {
       if ($this->isNumeric($v)) {
          /** @var string $v */
-         if (strval(intval($v)) == strval($v)) return true;
+         if (\strval(\intval($v)) == \strval($v)) return true;
          return false;
       }
       return false;
@@ -237,10 +237,10 @@ class Integer
     */
    protected function compare(array $value, array $array_int): bool
    {
-      $combine = array_map(null, $value, $array_int);
+      $combine = \array_map(null, $value, $array_int);
       foreach ($combine as $c) {
          list($v, $a) = $c;
-         $v = intval($v);
+         $v = \intval($v);
          if ($v > $a) return false;
          elseif ($v < $a) return true;
       }
@@ -252,7 +252,7 @@ class Integer
     */
    protected function beetween(string $value, int $max, int $min): bool
    {
-      $value = intval($value);
+      $value = \intval($value);
       return $value >= $min && $value <= $max;
    }
 
@@ -260,6 +260,6 @@ class Integer
     */
    protected function getLen(string $value): int
    {
-      return strlen(trim($value, '-'));
+      return \strlen(\trim($value, '-'));
    }
 }
