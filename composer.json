@@ -16,6 +16,7 @@
     "require": {
         "php": "^8.2"
     },
+    "minimum-stability": "stable",
     "require-dev": {
         "phpstan/phpstan": "@stable"
     }
