@@ -68,7 +68,7 @@ class Integer
       if ($len < self::BIG_INT_MAX_LENGHT) return true;
       if ($len > self::BIG_INT_MAX_LENGHT) return false;
       // длина 19
-      $last = str_starts_with($value, '-') ? 8 : 7;
+      $last = \str_starts_with($value, '-') ? 8 : 7;
       return $this->compare(\str_split(\trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
    }
 
@@ -81,7 +81,7 @@ class Integer
       /** @var int|float|string $value */
       $value = \strval($value);
       /** @var string $value */
-      if (str_starts_with($value, '-')) return false;
+      if (\str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
       if ($len > self::BIG_INT_MAX_UNSIGNED_LENGHT) return false;
@@ -102,7 +102,7 @@ class Integer
       if ($len < self::MAX_LEN_32_BIT) return true;
       if ($len > self::MAX_LEN_32_BIT) return false;
       // длина 10
-      $last = str_starts_with($value, '-') ? 8 : 7;
+      $last = \str_starts_with($value, '-') ? 8 : 7;
       return $this->compare(\str_split(\trim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
    }
 
@@ -116,7 +116,7 @@ class Integer
       /** @var int|float|string $value */
       $value = \strval($value);
       /** @var string $value */
-      if (str_starts_with($value, '-')) return false;
+      if (\str_starts_with($value, '-')) return false;
       $len = $this->getLen($value);
       if ($len < self::MAX_LEN_32_BIT) return true;
       if ($len > self::MAX_LEN_32_BIT) return false;
