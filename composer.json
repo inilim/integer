@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Inilim\\Integer\\": "src/"
-        }
+        },
+        "files": [
+            "function.php"
+        ]
     },
     "authors": [
         {
@@ -16,7 +19,8 @@
     "require": {
         "php": "^8.2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require-dev": {
         "phpstan/phpstan": "@stable"
     }
