@@ -11,18 +11,8 @@ use Inilim\LazyMethod\LazyMethodAbstract;
  * @method bool isBigInt(mixed $value)
  * @method static bool isBigInt(mixed $value)
  * 
- * 
  * @method bool isNumeric(mixed $value)
  * @method static bool isNumeric(mixed $value)
- * 
- * method bool compare(array $value, array $array_int)
- * method static bool compare(array $value, array $array_int)
- * 
- * method int getLen(string $value)
- * method static int getLen(string $value)
- * 
- * method bool beetween(string $value, int $max, int $min)
- * method static bool beetween(string $value, int $max, int $min)
  * 
  * @method void useLocale(string $locale)
  * @method static void useLocale(string $locale)
@@ -87,12 +77,26 @@ use Inilim\LazyMethod\LazyMethodAbstract;
  * @method bool isBigInt(mixed $value)
  * @method static bool isBigInt(mixed $value)
  * 
+ * ---------------------------------------------------
+ * internal
+ * ---------------------------------------------------
+ * 
  * method void ensureIntlExtensionIsInstalled()
  * method static void ensureIntlExtensionIsInstalled()
  * 
  * method \Inilim\Integer\Method\Property property()
  * method static \Inilim\Integer\Method\Property property()
+ * 
+ * method bool compare(array $value, array $array_int)
+ * method static bool compare(array $value, array $array_int)
+ * 
+ * method int getLen(string $value)
+ * method static int getLen(string $value)
+ * 
+ * method bool beetween(string $value, int $max, int $min)
+ * method static bool beetween(string $value, int $max, int $min)
  */
 class Integer extends LazyMethodAbstract
 {
+    protected const NAMESPACE = 'Inilim\Integer\Method';
 }
