@@ -2,7 +2,7 @@
 
 namespace Inilim\Integer;
 
-use Inilim\Integer\LazyMethodAbstract;
+use Inilim\LazyMethod\LazyMethodAbstract;
 
 /**
  * @method string|false format(int|float $number, ?int $precision = null, ?int $max_precision = null, ?string $locale = null)
@@ -90,8 +90,8 @@ use Inilim\Integer\LazyMethodAbstract;
  * method void ensureIntlExtensionIsInstalled()
  * method static void ensureIntlExtensionIsInstalled()
  * 
- * @method \Inilim\Integer\Method\Property property()
- * @method static \Inilim\Integer\Method\Property property()
+ * method \Inilim\Integer\Method\Property property()
+ * method static \Inilim\Integer\Method\Property property()
  */
 class Integer extends LazyMethodAbstract
 {
