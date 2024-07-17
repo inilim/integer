@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Number\Method;
+namespace Inilim\Number\MethodInteger;
 
 use Inilim\Number\Integer;
 
