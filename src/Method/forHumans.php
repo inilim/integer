@@ -1,8 +1,8 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
-use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
 function forHumans(int|float $number, int $precision = 0, ?int $max_precision = null, bool $abbreviate = false): bool|string
 {

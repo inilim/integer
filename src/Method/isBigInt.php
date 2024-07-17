@@ -1,8 +1,8 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
-use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
 function isBigInt(mixed $value): bool
 {

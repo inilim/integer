@@ -1,11 +1,11 @@
 {
     "name": "inilim/integer",
-    "description": "integer",
+    "description": "Number",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Inilim\\Integer\\": "src/"
+            "Inilim\\Number\\": "src/"
         },
         "files": [
             "function.php"

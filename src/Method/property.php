@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
 /**
- * @return \Inilim\Integer\Property
+ * @return \Inilim\Number\Property
  */
 function property()
 {

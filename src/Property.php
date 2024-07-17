@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Integer;
+namespace Inilim\Number;
 
 /**
  * @property string $locale

@@ -1,11 +1,11 @@
 <?php
 
-// use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
-// if (!function_exists('_int')) {
-//     function _int(): Integer
-//     {
-//         static $obj = new Integer;
-//         return $obj;
-//     }
-// }
+if (!\function_exists('_int')) {
+    function _int(): Integer
+    {
+        static $o = new Integer;
+        return $o;
+    }
+}

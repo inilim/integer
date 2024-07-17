@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
 function ensureIntlExtensionIsInstalled(): void
 {

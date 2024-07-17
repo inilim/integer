@@ -1,8 +1,8 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
-use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
 function summarize(int|float $number, int $precision = 0, ?int $max_precision = null, array $units = []): string|false
 {

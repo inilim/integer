@@ -7,7 +7,7 @@ use Inilim\ParseLazyMethod\ParseFunction;
 use Inilim\ParseLazyMethod\ResultParseFunction;
 use Inilim\ParseLazyMethod\FormationFunctionAnnotation;
 
-use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
 // php parser
 use PhpParser\Error;

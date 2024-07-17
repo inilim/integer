@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
 use NumberFormatter;
-use Inilim\Integer\Integer;
+use Inilim\Number\Integer;
 
 function format(int|float $number, ?int $precision = null, ?int $max_precision = null, ?string $locale = null): string|false
 {

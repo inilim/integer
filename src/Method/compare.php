@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Integer\Method;
+namespace Inilim\Number\Method;
 
 function compare(array $value, array $array_int): bool
 {
