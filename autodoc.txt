@@ -1,9 +1,3 @@
-<?php
-
-namespace Inilim\Integer;
-
-use Inilim\LazyMethod\LazyMethodAbstract;
-
 /**
  * @method  bool|string abbreviate(int|float $number, int $precision = 0, null|int $max_precision = null) 
  * @method  static  bool|string abbreviate(int|float $number, int $precision = 0, null|int $max_precision = null) 
@@ -118,9 +112,3 @@ use Inilim\LazyMethod\LazyMethodAbstract;
  * @param \Inilim\Integer\Method\useLocale
  * 
  */
-class Integer extends LazyMethodAbstract
-{
-    protected const NAMESPACE   = 'Inilim\Integer\Method';
-    protected const PATH_TO_DIR = __DIR__ . '/Method';
-    protected const ALIAS       = [];
-}
