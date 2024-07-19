@@ -58,6 +58,59 @@ class Integer
 
    private const MAX_LEN_32_BIT = 10;
 
+   function checkPositive(int $value): bool
+   {
+      return $value > -1;
+   }
+
+   function checkNegative(int $value): bool
+   {
+      return $value < 1;
+   }
+
+   function checkEqual(int $value, int $equal): bool
+   {
+      return $value === $equal;
+   }
+
+   function checkMax(int $value, int $max): bool
+   {
+      return $value <= $max;
+   }
+
+   function checkMin(int $value, int $min): bool
+   {
+      return $value >= $min;
+   }
+
+   function checkLenMax(int $value, int $max): bool
+   {
+      return $this->checkMax(\strlen(\strval($value)), $max);
+   }
+
+   function checkLenMin(int $value, int $min): bool
+   {
+      return $this->checkMin(\strlen(\strval($value)), $min);
+   }
+
+   function checkLenBetween(int $value, int $from_to, int $to_from): bool
+   {
+      return $this->checkBetween(\strlen(\strval($value)), $from_to, $to_from);
+   }
+
+   function checkLenEqual(int $value, int $equal): bool
+   {
+      return $this->checkEqual(\strlen(\strval($value)), $equal);
+   }
+
+   function checkBetween(int $value, int $from_to, int $to_from): bool
+   {
+      if ($from_to > $to_from) {
+         list($to_from, $from_to) = [$from_to, $to_from];
+      }
+      return $value >= $from_to && $value <= $to_from;
+   }
+
    /**
     * -9223372036854775808 <> 9223372036854775807
     */
