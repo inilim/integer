@@ -61,7 +61,7 @@ class Integer
    /**
     * -9223372036854775808 <> 9223372036854775807
     */
-   public function isBigInt(mixed $value): bool
+   function isBigInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -78,7 +78,7 @@ class Integer
    /**
     * 0 <> 18446744073709551615
     */
-   public function isBigIntUnsigned(mixed $value): bool
+   function isBigIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -95,7 +95,7 @@ class Integer
    /**
     * -2147483648 <> 2147483647
     */
-   public function isInt(mixed $value): bool
+   function isInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -113,7 +113,7 @@ class Integer
     * 
     * 0 <> 4_294_967_295
     */
-   public function isIntUnsigned(mixed $value): bool
+   function isIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -133,7 +133,7 @@ class Integer
 
    /**
     */
-   public function isMediumInt(mixed $value): bool
+   function isMediumInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -145,7 +145,7 @@ class Integer
 
    /**
     */
-   public function isMediumIntUnsigned(mixed $value): bool
+   function isMediumIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -157,7 +157,7 @@ class Integer
 
    /**
     */
-   public function isSmallInt(mixed $value): bool
+   function isSmallInt(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -169,7 +169,7 @@ class Integer
 
    /**
     */
-   public function isSmallIntUnsigned(mixed $value): bool
+   function isSmallIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -182,7 +182,7 @@ class Integer
    /**
     * @param mixed $value
     */
-   public function isTinyInt($value): bool
+   function isTinyInt($value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -194,7 +194,7 @@ class Integer
 
    /**
     */
-   public function isTinyIntUnsigned(mixed $value): bool
+   function isTinyIntUnsigned(mixed $value): bool
    {
       if (!$this->isNumeric($value)) return false;
       /** @var int|float|string $value */
@@ -207,12 +207,12 @@ class Integer
    /**
     * функция не проверяет длину значения, будет true даже с bigint и более.
     */
-   public function isNumeric(mixed $v): bool
+   function isNumeric(mixed $v): bool
    {
       if (!\is_scalar($v) || \is_bool($v)) return false;
       // here string|int|float
-      $v = \strval($v);
-      if (\preg_match('#^0$#', $v) || \preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;
+      // if (\preg_match('#^0$#', $v) || \preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;
+      if (\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#', \strval($v))) return true;
       return false;
    }
 
@@ -220,7 +220,7 @@ class Integer
     * проверка int для php, 32bit или 64bit
     * может ли значение стать integer без изменений
     */
-   public function isIntPHP(mixed $v): bool
+   function isIntPHP(mixed $v): bool
    {
       if ($this->isNumeric($v)) {
          /** @var string $v */
@@ -246,7 +246,7 @@ class Integer
    /**
     * Format the given number according to the current locale.
     */
-   public function format(int|float $number, ?int $precision = null, ?int $max_precision = null, ?string $locale = null): string|false
+   function format(int|float $number, ?int $precision = null, ?int $max_precision = null, ?string $locale = null): string|false
    {
       $this->ensureIntlExtensionIsInstalled();
 
@@ -264,7 +264,7 @@ class Integer
    /**
     * Spell out the given number in the given locale.
     */
-   public function spell(int|float $number, ?string $locale = null, ?int $after = null, ?int $until = null): string
+   function spell(int|float $number, ?string $locale = null, ?int $after = null, ?int $until = null): string
    {
       $this->ensureIntlExtensionIsInstalled();
 
@@ -284,7 +284,7 @@ class Integer
    /**
     * Convert the given number to ordinal form.
     */
-   public function ordinal(int|float $number, ?string $locale = null): string
+   function ordinal(int|float $number, ?string $locale = null): string
    {
       $this->ensureIntlExtensionIsInstalled();
 
@@ -296,7 +296,7 @@ class Integer
    /**
     * Convert the given number to its percentage equivalent.
     */
-   public function percentage(int|float $number, int $precision = 0, ?int $max_precision = null, ?string $locale = null): string|false
+   function percentage(int|float $number, int $precision = 0, ?int $max_precision = null, ?string $locale = null): string|false
    {
       $this->ensureIntlExtensionIsInstalled();
 
@@ -314,7 +314,7 @@ class Integer
    /**
     * Convert the given number to its currency equivalent.
     */
-   public function currency(int|float $number, string $in = 'USD', ?string $locale = null): string|false
+   function currency(int|float $number, string $in = 'USD', ?string $locale = null): string|false
    {
       $this->ensureIntlExtensionIsInstalled();
 
@@ -326,7 +326,7 @@ class Integer
    /**
     * Convert the given number to its file size equivalent.
     */
-   public function fileSize(int|float $bytes, int $precision = 0, ?int $max_precision = null): string
+   function fileSize(int|float $bytes, int $precision = 0, ?int $max_precision = null): string
    {
       $units = [
          'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
@@ -346,7 +346,7 @@ class Integer
    /**
     * Convert the number to its human-readable equivalent.
     */
-   public function abbreviate(int|float $number, int $precision = 0, ?int $max_precision = null): bool|string
+   function abbreviate(int|float $number, int $precision = 0, ?int $max_precision = null): bool|string
    {
       return $this->forHumans($number, $precision, $max_precision, abbreviate: true);
    }
@@ -354,7 +354,7 @@ class Integer
    /**
     * Convert the number to its human-readable equivalent.
     */
-   public function forHumans(int|float $number, int $precision = 0, ?int $max_precision = null, bool $abbreviate = false): bool|string
+   function forHumans(int|float $number, int $precision = 0, ?int $max_precision = null, bool $abbreviate = false): bool|string
    {
       return $this->summarize($number, $precision, $max_precision, $abbreviate ? [
          3 => 'K',
@@ -409,7 +409,7 @@ class Integer
    /**
     * Clamp the given number between the given minimum and maximum.
     */
-   public function clamp(int|float $number, int|float $min, int|float $max): int|float
+   function clamp(int|float $number, int|float $min, int|float $max): int|float
    {
       return \min(\max($number, $min), $max);
    }
