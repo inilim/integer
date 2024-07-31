@@ -193,7 +193,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_MAX_LENGHT) return false;
-      return $this->between($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
+      return $this->between($value, self::MEDIUM_INT_MIN, self::MEDIUM_INT_MAX);
    }
 
    /**
@@ -205,7 +205,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->between($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
+      return $this->between($value, self::MEDIUM_INT_UNSIGNED_MIN, self::MEDIUM_INT_UNSIGNED_MAX);
    }
 
    /**
@@ -217,7 +217,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_MAX_LENGHT) return false;
-      return $this->between($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
+      return $this->between($value, self::SMALL_INT_MIN, self::SMALL_INT_MAX);
    }
 
    /**
@@ -229,7 +229,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->between($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
+      return $this->between($value, self::SMALL_INT_UNSIGNED_MIN, self::SMALL_INT_UNSIGNED_MAX);
    }
 
    /**
@@ -242,7 +242,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_MAX_LENGHT) return false;
-      return $this->between($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
+      return $this->between($value, self::TINY_INT_MIN, self::TINY_INT_MAX);
    }
 
    /**
@@ -254,7 +254,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->between($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
+      return $this->between($value, self::TINY_INT_UNSIGNED_MIN, self::TINY_INT_UNSIGNED_MAX);
    }
 
    /**
@@ -478,7 +478,7 @@ class Integer
    /**
     * @param numeric-string|int $value
     */
-   function between(string|int $value, int $max, int $min): bool
+   function between(string|int $value, int $min, int $max): bool
    {
       $v = \intval($value);
       return $v >= $min && $v <= $max;
