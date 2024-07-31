@@ -193,7 +193,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_MAX_LENGHT) return false;
-      return $this->beetween($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
+      return $this->between($value, self::MEDIUM_INT_MAX, self::MEDIUM_INT_MIN);
    }
 
    /**
@@ -205,7 +205,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
+      return $this->between($value, self::MEDIUM_INT_UNSIGNED_MAX, self::MEDIUM_INT_UNSIGNED_MIN);
    }
 
    /**
@@ -217,7 +217,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_MAX_LENGHT) return false;
-      return $this->beetween($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
+      return $this->between($value, self::SMALL_INT_MAX, self::SMALL_INT_MIN);
    }
 
    /**
@@ -229,7 +229,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::SMALL_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
+      return $this->between($value, self::SMALL_INT_UNSIGNED_MAX, self::SMALL_INT_UNSIGNED_MIN);
    }
 
    /**
@@ -242,7 +242,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_MAX_LENGHT) return false;
-      return $this->beetween($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
+      return $this->between($value, self::TINY_INT_MAX, self::TINY_INT_MIN);
    }
 
    /**
@@ -254,7 +254,7 @@ class Integer
       $value = \strval($value);
       /** @var string $value */
       if ($this->getLen($value) > self::TINY_INT_UNSIGNED_MAX_LENGHT) return false;
-      return $this->beetween($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
+      return $this->between($value, self::TINY_INT_UNSIGNED_MAX, self::TINY_INT_UNSIGNED_MIN);
    }
 
    /**
@@ -470,9 +470,18 @@ class Integer
    /**
     * Set the default locale.
     */
-   public  function useLocale(string $locale): void
+   function useLocale(string $locale): void
    {
       $this->locale = $locale;
+   }
+
+   /**
+    * @param numeric-string|int $value
+    */
+   function between(string|int $value, int $max, int $min): bool
+   {
+      $v = \intval($value);
+      return $v >= $min && $v <= $max;
    }
 
    /**
@@ -513,15 +522,6 @@ class Integer
          elseif ($v < $a) return true;
       }
       return true;
-   }
-
-   /**
-    * @param numeric-string $value
-    */
-   protected function beetween(string $value, int $max, int $min): bool
-   {
-      $value = \intval($value);
-      return $value >= $min && $value <= $max;
    }
 
    /**
