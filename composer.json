@@ -17,7 +17,8 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "inilim/func_core": "dev-main"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
