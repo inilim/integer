@@ -300,21 +300,12 @@ class Integer
 
    function getRandomIntByLength(int $length): int
    {
-      $max_len = $this->getCurLenMaxInt();
-      $length = \_int()->clamp($length, 1, $max_len);
-      if ($length === 1) {
-         $start = 0;
-         $end   = 9;
-      } else {
-         $start = \intval(1 . \str_repeat('0', ($length - 1)));
-         $end   = $max_len === $length ? \PHP_INT_MAX : \intval(\str_repeat('9', $length));
-      }
-      return \mt_rand($start, $end);
+      return FuncCore::getRandomIntByLength($length);
    }
 
    function getCurLenMaxInt(): int
    {
-      return \strlen(\strval(\PHP_INT_MAX));
+      return FuncCore::getCurLenMaxInt();
    }
 
    // ------------------------------------------------------------------
@@ -506,7 +497,7 @@ class Integer
     */
    function clamp(int|float $number, int|float $min, int|float $max): int|float
    {
-      return \min(\max($number, $min), $max);
+      return FuncCore::clamp($number, $min, $max);
    }
 
    /**
