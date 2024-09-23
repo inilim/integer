@@ -14,10 +14,10 @@ class Integer
    const TINY_INT_MIN = -127;
    const TINY_INT_UNSIGNED_MAX = 255;
    const TINY_INT_UNSIGNED_MIN = 0;
-   private const TINY_INT_MAX_LENGHT = 3;
-   private const TINY_INT_MIN_LENGHT = 3;
-   private const TINY_INT_UNSIGNED_MAX_LENGHT = 3;
-   private const TINY_INT_UNSIGNED_MIN_LENGHT = 1;
+   const TINY_INT_MAX_LENGHT = 3;
+   const TINY_INT_MIN_LENGHT = 3;
+   const TINY_INT_UNSIGNED_MAX_LENGHT = 3;
+   const TINY_INT_UNSIGNED_MIN_LENGHT = 1;
 
    // SMALLINT: представляет целые числа от -32768 до 32767, занимает 2 байтa
    // SMALLINT UNSIGNED: представляет целые числа от 0 до 65535, занимает 2 байтa
@@ -25,10 +25,10 @@ class Integer
    const SMALL_INT_MIN = -32768;
    const SMALL_INT_UNSIGNED_MAX = 65535;
    const SMALL_INT_UNSIGNED_MIN = 0;
-   private const SMALL_INT_MAX_LENGHT = 5;
-   private const SMALL_INT_MIN_LENGHT = 5;
-   private const SMALL_INT_UNSIGNED_MAX_LENGHT = 5;
-   private const SMALL_INT_UNSIGNED_MIN_LENGHT = 1;
+   const SMALL_INT_MAX_LENGHT = 5;
+   const SMALL_INT_MIN_LENGHT = 5;
+   const SMALL_INT_UNSIGNED_MAX_LENGHT = 5;
+   const SMALL_INT_UNSIGNED_MIN_LENGHT = 1;
 
    // MEDIUMINT: представляет целые числа от -8388608 до 8388607, занимает 3 байта
    // MEDIUMINT UNSIGNED: представляет целые числа от 0 до 16777215, занимает 3 байта
@@ -36,28 +36,28 @@ class Integer
    const MEDIUM_INT_MIN = -8388608;
    const MEDIUM_INT_UNSIGNED_MAX = 16777215;
    const MEDIUM_INT_UNSIGNED_MIN = 0;
-   private const MEDIUM_INT_MAX_LENGHT = 7;
-   private const MEDIUM_INT_MIN_LENGHT = 7;
-   private const MEDIUM_INT_UNSIGNED_MAX_LENGHT = 8;
-   private const MEDIUM_INT_UNSIGNED_MIN_LENGHT = 1;
+   const MEDIUM_INT_MAX_LENGHT = 7;
+   const MEDIUM_INT_MIN_LENGHT = 7;
+   const MEDIUM_INT_UNSIGNED_MAX_LENGHT = 8;
+   const MEDIUM_INT_UNSIGNED_MIN_LENGHT = 1;
 
    // INT: представляет целые числа от -2147483648 до 2147483647, занимает 4 байта
    // INT UNSIGNED: представляет целые числа от 0 до 4294967295, занимает 4 байта
    const INT_MAX = 2147483647;
    const INT_MIN = -2147483648;
-   private const INT_MAX_LENGHT = 10;
-   private const INT_MIN_LENGHT = 10;
-   private const INT_MAX_UNSIGNED_LENGHT = 10;
-   private const INT_MIN_UNSIGNED_LENGHT = 1;
+   const INT_MAX_LENGHT = 10;
+   const INT_MIN_LENGHT = 10;
+   const INT_MAX_UNSIGNED_LENGHT = 10;
+   const INT_MIN_UNSIGNED_LENGHT = 1;
 
    // BIGINT: представляет целые числа от -9223372036854775808 до 9223372036854775807, занимает 8 байт
    // BIGINT UNSIGNED: представляет целые числа от 0 до 18446744073709551615, занимает 8 байт
-   private const BIG_INT_MAX_LENGHT = 19;
-   private const BIG_INT_MIN_LENGHT = 19;
-   private const BIG_INT_MAX_UNSIGNED_LENGHT = 20;
-   private const BIG_INT_MIN_UNSIGNED_LENGHT = 1;
+   const BIG_INT_MAX_LENGHT = 19;
+   const BIG_INT_MIN_LENGHT = 19;
+   const BIG_INT_MAX_UNSIGNED_LENGHT = 20;
+   const BIG_INT_MIN_UNSIGNED_LENGHT = 1;
 
-   private const MAX_LEN_32_BIT = 10;
+   const MAX_LEN_32_BIT = 10;
 
    function checkPositive(int $value): bool
    {
@@ -296,6 +296,25 @@ class Integer
          return false;
       }
       return false;
+   }
+
+   function getRandomIntByLength(int $length): int
+   {
+      $max_len = $this->getCurLenMaxInt();
+      $length = \_int()->clamp($length, 1, $max_len);
+      if ($length === 1) {
+         $start = 0;
+         $end   = 9;
+      } else {
+         $start = \intval(1 . \str_repeat('0', ($length - 1)));
+         $end   = $max_len === $length ? \PHP_INT_MAX : \intval(\str_repeat('9', $length));
+      }
+      return \mt_rand($start, $end);
+   }
+
+   function getCurLenMaxInt(): int
+   {
+      return \strlen(\strval(\PHP_INT_MAX));
    }
 
    // ------------------------------------------------------------------

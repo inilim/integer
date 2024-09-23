@@ -23,6 +23,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "phpstan/phpstan": "@stable"
+        "phpstan/phpstan": "@stable",
+        "inilim/dump": "dev-main"
     }
 }
