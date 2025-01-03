@@ -360,9 +360,28 @@ class Integer
    }
 
    /**
-    * Convert the given number to ordinal form.
+    * Spell out the given number in the given locale in ordinal form.
+    *
+    * @param  int|float  $number
+    * @param  string|null  $locale
+    * @return string
     */
-   function ordinal(int|float $number, ?string $locale = null): string
+   function spellOrdinal($number, ?string $locale = null): string
+   {
+      $this->ensureIntlExtensionIsInstalled();
+
+      $formatter = new NumberFormatter($locale ?? static::$locale, NumberFormatter::SPELLOUT);
+
+      $formatter->setTextAttribute(NumberFormatter::DEFAULT_RULESET, '%spellout-ordinal');
+
+      return $formatter->format($number);
+   }
+
+   /**
+    * Convert the given number to ordinal form.
+    * @param int|float $number
+    */
+   function ordinal($number, ?string $locale = null): string
    {
       $this->ensureIntlExtensionIsInstalled();
 
